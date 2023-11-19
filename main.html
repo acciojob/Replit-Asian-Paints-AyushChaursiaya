@@ -1,16 +1,91 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Color Changer</title>
+  <style>
+    #grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
 
+    .grid-item {
+      width: 100px;
+      height: 100px;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
+
+<div>
+  <label for="block_id">Block ID:</label>
+  <input type="number" id="block_id" min="1" max="9" required>
+</div>
+
+<div>
+  <label for="colour_id">Color:</label>
+  <input type="color" id="colour_id" value="#ffffff" required>
+</div>
+
+<button id="change_button">Change Color</button>
+<button id="reset_button">Reset</button>
+
+<div id="grid-container">
+  <!-- Grid items with ids 1 through 9 -->
+  <div class="grid-item" id="1">1</div>
+  <div class="grid-item" id="2">2</div>
+  <div class="grid-item" id="3">3</div>
+  <div class="grid-item" id="4">4</div>
+  <div class="grid-item" id="5">5</div>
+  <div class="grid-item" id="6">6</div>
+  <div class="grid-item" id="7">7</div>
+  <div class="grid-item" id="8">8</div>
+  <div class="grid-item" id="9">9</div>
+</div>
+
+<script>
+  document.getElementById('change_button').addEventListener('click', function() {
+    changeColor();
+  });
+
+  document.getElementById('reset_button').addEventListener('click', function() {
+    resetColors();
+  });
+
+  function changeColor() {
+    var blockId = document.getElementById('block_id').value;
+    var color = document.getElementById('colour_id').value;
+
+    var selectedBlock = document.getElementById(blockId);
+
+    if (selectedBlock) {
+      // Reset all grid items to transparent
+      resetColors();
+
+      // Change the background color of the selected block
+      selectedBlock.style.backgroundColor = color;
+    } else {
+      alert('Invalid block ID. Please enter a number between 1 and 9.');
+    }
+  }
+
+  function resetColors() {
+    var gridItems = document.getElementsByClassName('grid-item');
+
+    // Set the background color of all grid items to transparent
+    for (var i = 0; i < gridItems.length; i++) {
+      gridItems[i].style.backgroundColor = 'transparent';
+    }
+  }
 </script>
 
 </body>
-
 </html>
